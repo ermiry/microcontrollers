@@ -33,7 +33,7 @@ inicio:
     ; input en el puerto A
     ; copiar valor de puerto A a memoria 0x30 (temp)
     ; right shift 1 vez al puerto A
-    ; XOR nuevo valor de puerto A con valor en memoria 0x30
+    ; XOR al nuevo valor de puerto A con valor en memoria 0x30
     ; mover el relsultado para ser desplegador a puerto B
     
     ;BSF PORTB, 0
@@ -69,75 +69,8 @@ inicio:
 
     ; mover el resultado del XOR al puerto B para desplegar
     MOVWF PORTB
-    CALL tiempo
+    NOP
     goto inicio
-
-tiempo:MOVLW d'164'
-       MOVWF i
-iloop: MOVLW d'80';
-       MOVWF j
-jloop: MOVLW d'5';
-       MOVWF k
-kloop: DECFSZ k, f
-       GOTO kloop
-       DECFSZ j, f
-       GOTO jloop
-       DECFSZ i,f
-       GOTO iloop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       nop
-       NOP
-       NOP
-       NOP
-       NOP
-       RETURN
 
    
     END
