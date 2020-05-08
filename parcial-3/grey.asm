@@ -29,6 +29,12 @@ inicio:
     
     MOVLW b'00000000'
     MOVWF PORTB
+
+    ; input en el puerto A
+    ; copiar valor de puerto A a memoria 0x30 (temp)
+    ; right shift 1 vez al puerto A
+    ; XOR nuevo valor de puerto A con valor en memoria 0x30
+    ; mover el relsultado para ser desplegador a puerto B
     
     ;BSF PORTB, 0
     BSF A, 0
