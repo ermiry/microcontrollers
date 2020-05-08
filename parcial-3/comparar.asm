@@ -30,7 +30,7 @@ goto bandera
  
 confirmacion: BTFSC PORTA,1
 GOTO confirmacion
-GOTO restar
+CALL restar
     RETURN
    
 restar:
@@ -48,92 +48,28 @@ bandera: MOVLW b'11111111'
    ;Negativo c=0, z=0
    ;Cero     c=1, z=1
    
-   posoneg: BTFSS STATUS, C ;c=1?
+posoneg: BTFSS STATUS, C ;c=1?
    goto negativo
    goto positivo
-   negativo:BSF PORTB, 3
-   CALL tiempo
-   BCF PORTB, 3
-   goto nuevo
-   positivo: BSF PORTB, 2
-   CALL tiempo
-   BCF PORTB, 2
+negativo: BCF PORTB, 3
+    BCF PORTB, 2
+    BCF PORTB, 4
+    BSF PORTB, 3
+   goto restart
+positivo: BCF PORTB, 3
+    BCF PORTB, 2
+    BCF PORTB, 4
+    BSF PORTB, 2
    goto proceso
-   cero: BSF PORTB, 4
-   CALL tiempo
+cero: BCF PORTB, 3
+   BCF PORTB, 2
    BCF PORTB, 4
-   goto nuevo
+   BSF PORTB, 4
+   goto restart
    
    
-    nuevo: MOVLW b'00001001'
+restart: MOVLW b'00001001'
     MOVWF PORTB
     GOTO proceso
-   
-tiempo:MOVLW d'164'
-       MOVWF i
-iloop: MOVLW d'80';
-       MOVWF j
-jloop: MOVLW d'5';
-       MOVWF k
-kloop: DECFSZ k, f
-       GOTO kloop
-       DECFSZ j, f
-       GOTO jloop
-       DECFSZ i,f
-       GOTO iloop
-       nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    NOP
-    NOP
-    NOP
-    NOP
-       RETURN
    
     END
