@@ -49,14 +49,14 @@ inicio:
     MOVWF PORTB
     
     ; INPUT
-;    BSF A, 0
-;    BSF A, 1
-;    BSF A, 2
-;    BSF A, 3
-    BSF A, 4
-;    BSF A, 5
-;    BSF A, 6
-;    BSF A, 7
+   ; BSF A, 0
+   ; BSF A, 1
+   ; BSF A, 2
+   ; BSF A, 3
+   ; BSF A, 4
+   ; BSF A, 5
+   BSF A, 6
+   ; BSF A, 7
     
     ; INIT
     ; init mask with top most bit
@@ -67,8 +67,12 @@ inicio:
     
  loop:
     ; r |= m
+    MOVLW b'00000000'
+    MOVWF R
+    
     MOVF M, 0
-    IORWF R, 1
+    IORWF R, 0
+    MOVWF R
     ; r * r
     ; mover R a registro aux para multi
     MOVF R, 0
@@ -111,6 +115,10 @@ pos:
 ; error!
 neg:
     MOVWF PORTB	    ; resultado de la resta
+    
+    BCF STATUS, C
+    RRF M, 1
+    
     goto loop
     
 multi:
